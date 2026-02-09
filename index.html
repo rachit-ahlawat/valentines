@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Gilehri ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg1:#ff9a9e;
+--bg2:#fad0c4;
+--bg3:#fad0c4;
+--bg4:#ffd1ff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+transition: background 1s ease;
+overflow:hidden;
+}
+
+.container{
+background: rgba(255,255,255,0.15);
+padding:40px;
+border-radius:20px;
+backdrop-filter: blur(10px);
+box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+text-align:center;
+width:90%;
+max-width:500px;
+position:relative;
+}
+
+.hidden{
+opacity:0;
+visibility:hidden;
+height:0;
+overflow:hidden;
+transition:all 0.8s ease;
+}
+
+.visible{
+opacity:1;
+visibility:visible;
+height:auto;
+transition:all 0.8s ease;
+}
+
+h1{
+margin-bottom:15px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+font-size:16px;
+margin:10px;
+transition: all 0.3s ease;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+img{
+width:200px;
+border-radius:15px;
+margin-bottom:15px;
+box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+.yes{background:#ff4b6e;color:white;}
+.no{background:#555;color:white;position:absolute;}
+.refresh{background:#4CAF50;color:white;}
+.primary{background:#ff4b6e;color:white;}
+.secondary{background:#555;color:white;}
+
+.message{
+margin-top:20px;
+white-space:pre-line;
+}
+
+.emoji{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation: fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- SCREEN 1 -->
+<div id="introScreen" class="visible">
+
+<img src="img1.jpeg">
+
+<h1>Hii Gilehri, Rat this side</h1>
+
+<button class="primary" onclick="go404()">Hii Rat..</button>
+
+</div>
+
+
+<!-- SCREEN 2 -->
+<div id="errorScreen" class="hidden">
+
+<h1>404</h1>
+
+<p>Oops! Page Not Found</p>
+
+<button class="refresh" onclick="showValentine()">Refresh</button>
+
+</div>
+
+
+<!-- SCREEN 3 -->
+<div id="valentineScreen" class="hidden">
+
+<div id="emoji" class="emoji">💔</div>
+
+<h1>Will you be my Valentine Gills?</h1>
+
+<button id="yesBtn" class="yes" onclick="acceptLove()">YES</button>
+
+<button id="noBtn" class="no" onclick="moveNo()">NO</button>
+
+<div id="loveMessage" class="message hidden">
+
+By clicking YES you agree to:
+
+- Unlimited cuddles
+- Lifetime supply of bad puns
+- Mutual chocolate brownie stealing rights 
+
+Effective immediately! 🚀
+
+</div>
+
+</div>
+
+
+<!-- SCREEN 4 FINAL QUESTION -->
+<div id="finalQuestion" class="hidden">
+
+<h1>Did I get a smile on your face ?</h1>
+
+<button class="primary" onclick="smileYes()">Hell Yeah</button>
+
+<button class="secondary" onclick="smileNo()">Not really</button>
+
+</div>
+
+
+<!-- SCREEN 5 FINAL RESPONSE -->
+<div id="finalResponse" class="hidden">
+
+<img src="img2.jpeg" id="finalImg">
+
+<h1 id="finalText"></h1>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+let noClicks=0;
+
+let gradients=[
+["#ff9a9e","#fad0c4"],
+["#a18cd1","#fbc2eb"],
+["#fbc2eb","#a6c1ee"],
+["#ffecd2","#fcb69f"]
+];
+
+
+function switchScreen(hide,show){
+
+document.getElementById(hide).classList.remove("visible");
+document.getElementById(hide).classList.add("hidden");
+
+setTimeout(()=>{
+document.getElementById(show).classList.remove("hidden");
+document.getElementById(show).classList.add("visible");
+},400);
+
+}
+
+
+function go404(){
+
+switchScreen("introScreen","errorScreen");
+
+}
+
+
+function showValentine(){
+
+switchScreen("errorScreen","valentineScreen");
+
+placeNoButton();
+
+}
+
+
+function placeNoButton(){
+
+const btn=document.getElementById("noBtn");
+
+btn.style.left="60%";
+btn.style.top="60%";
+
+}
+
+
+function moveNo(){
+
+const btn=document.getElementById("noBtn");
+
+const container=document.querySelector(".container");
+
+const rect=container.getBoundingClientRect();
+
+btn.style.left=Math.random()*rect.width+"px";
+btn.style.top=Math.random()*rect.height+"px";
+
+const gradient=gradients[Math.floor(Math.random()*gradients.length)];
+
+document.body.style.background=
+`linear-gradient(135deg,${gradient[0]},${gradient[1]})`;
+
+noClicks++;
+
+if(noClicks>=2){
+
+document.getElementById("emoji").innerHTML="😭";
+
+}
+
+}
+
+
+function acceptLove(){
+
+document.getElementById("loveMessage").classList.remove("hidden");
+
+setTimeout(()=>{
+
+document.getElementById("yesBtn").style.display="none";
+document.getElementById("noBtn").style.display="none";
+
+},1000);
+
+confetti();
+
+setTimeout(()=>{
+
+switchScreen("valentineScreen","finalQuestion");
+
+},6000);
+
+}
+
+
+function smileYes(){
+
+switchScreen("finalQuestion","finalResponse");
+
+document.getElementById("finalText").innerText=
+"I knew it love ❤️";
+
+}
+
+
+function smileNo(){
+
+switchScreen("finalQuestion","finalResponse");
+
+document.getElementById("finalText").innerText=
+"I know you're lying I can see you smiling like this 😌";
+
+}
+
+
+function confetti(){
+
+const duration=5000;
+
+const end=Date.now()+duration;
+
+(function frame(){
+
+for(let i=0;i<5;i++){
+
+const conf=document.createElement("div");
+
+conf.className="confetti";
+
+conf.style.left=Math.random()*window.innerWidth+"px";
+
+conf.style.background=
+`hsl(${Math.random()*360},100%,50%)`;
+
+conf.style.animationDuration=
+(Math.random()*3+2)+"s";
+
+document.body.appendChild(conf);
+
+setTimeout(()=>conf.remove(),5000);
+
+}
+
+if(Date.now()<end){
+
+requestAnimationFrame(frame);
+
+}
+
+})();
+
+}
+
+</script>
+
+</body>
+</html>
